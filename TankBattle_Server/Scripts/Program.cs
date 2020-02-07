@@ -10,6 +10,12 @@ namespace TankBattle_Server
     {
         static void Main(string[] args)
         {
+            if (!DbManager.Connect("tankbattle", "127.0.0.1", 3306, "root", ""))
+            {
+                return;
+            }
+
+            NetManager.StartNetLoop(8888);
         }
     }
 }
