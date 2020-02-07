@@ -6,14 +6,19 @@
 	功能：事件处理者
 *****************************************************/
 
+using System;
+
 public partial class EventHandler
 {
 
     public static void OnDisconnect(ClientState state) {
+        //Player下线
         if (state.player != null)
         {
-            //to  do
-            //保存数据、移除玩家socket
+            //保存数据
+            DbManager.UpdatePlayerData(state.player.id, state.player.data);
+            //移除
+            PlayerManager.RemovePlayer(state.player.id);
         }
     }
 
