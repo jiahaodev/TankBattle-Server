@@ -36,6 +36,7 @@ public class NetManager
         listenfd = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         IPAddress ipAdr = IPAddress.Parse("0.0.0.0");
         IPEndPoint ipEp = new IPEndPoint(ipAdr, listenPort);
+        listenfd.Bind(ipEp);
         listenfd.Listen(0);
         Console.WriteLine("[服务器]启动成功");
         //循环读取
