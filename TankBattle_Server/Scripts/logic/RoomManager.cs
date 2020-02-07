@@ -64,5 +64,13 @@ public class RoomManager
         }
         return msg;
     }
+
+    //更新所有房间战斗
+    public static void Update() {
+        foreach (Room room in rooms.Values)
+        {
+            room.Update();
+        }
+    }
 }
 
