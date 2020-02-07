@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -170,7 +171,17 @@ public class NetManager
         readBuff.readIdx += bodyCount;
         readBuff.CheckAndMoveBytes();
 
-        //分发消息 to do
+        //分发消息
+        MethodInfo mi = typeof(MsgHandler).GetMethod(protoName);
+        object[] o = {state,msgBase};
+        if (mi != null)
+        {
+            mi.Invoke(null,o);
+        }
+        else
+        {
+            Console.WriteLine("OnReceiveData Invoke fail " + protoName);
+        }
 
         //继续读取消息
         if (readBuff.length > 2)
@@ -213,20 +224,27 @@ public class NetManager
     //关闭连接
     private static void Close(ClientState state)
     {
-        //连接关闭通知 todo
+        //连接关闭通知
+        MethodInfo mei = typeof(EventHandler).GetMethod("OnDisconnect");
+        object[] ob = { state };
+        mei.Invoke(null, ob);
 
         //关闭
         state.socket.Close();
         clients.Remove(state.socket);
     }
 
-    //定时器
+    //定时器任务
     private static void Timer()
     {
-        //消息分发 to do
+        //消息分发
+        MethodInfo mei = typeof(EventHandler).GetMethod("OnTimer");
+        object[] ob = { };
+        mei.Invoke(null, ob);
     }
 
-    private static long GetTimeStamp()
+    //获取时间戳
+    public static long GetTimeStamp()
     {
         TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
         return Convert.ToInt64(ts.TotalSeconds);
