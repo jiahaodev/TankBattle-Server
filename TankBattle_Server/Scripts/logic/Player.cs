@@ -17,10 +17,17 @@ public class Player
         this.state = state;
     }
 
-    //临时数据，如：坐标
+    //坐标
     public int x;
     public int y;
     public int z;
+    //在哪个房间
+    public int roomId = -1;
+    //阵营
+    public int camp = 1;
+    //坦克生命值
+    public int hp = 100;
+
     //数据库数据
     public PlayerData data;
 
