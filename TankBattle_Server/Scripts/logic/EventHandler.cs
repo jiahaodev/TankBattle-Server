@@ -15,6 +15,14 @@ public partial class EventHandler
         //Player下线
         if (state.player != null)
         {
+            //离开战场
+            int roomId = state.player.roomId;
+            if (roomId >= 0)
+            {
+                Room room = RoomManager.GetRoom(roomId);
+                room.RemovePlayer(state.player.id);
+            }
+
             //保存数据
             DbManager.UpdatePlayerData(state.player.id, state.player.data);
             //移除
