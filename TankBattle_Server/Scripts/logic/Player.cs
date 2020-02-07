@@ -17,10 +17,13 @@ public class Player
         this.state = state;
     }
 
-    //坐标
-    public int x;
-    public int y;
-    public int z;
+    //坐标和旋转
+    public float x;
+    public float y;
+    public float z;
+    public float ex;
+    public float ey;
+    public float ez;
     //在哪个房间
     public int roomId = -1;
     //阵营
