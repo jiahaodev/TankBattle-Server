@@ -222,7 +222,7 @@ public class NetManager
 
 
     //关闭连接
-    private static void Close(ClientState state)
+    public static void Close(ClientState state)
     {
         //连接关闭通知
         MethodInfo mei = typeof(EventHandler).GetMethod("OnDisconnect");
