@@ -6,7 +6,7 @@
 	功能：登陆消息处理
 *****************************************************/
 
-public partial class LoginMsgHandler
+public partial class MsgHandler
 {
     //注册协议处理
     public static void MsgRegister(ClientState state,MsgBase msgBase) {
